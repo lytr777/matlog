@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class HW4 {
 
-    private int error;
+    private int error, current;
 
     private PrintWriter pw;
     private InitialData data;
@@ -42,67 +42,24 @@ public class HW4 {
         assumptionList = new AssumptionList(data.assumptions);
         modusPonensChecker = new ModusPonensChecker(data.proof);
         error = -1;
+        current = 0;
+    }
+
+    public int checkLast() {
+        int i = data.proof.size();
+        if (current != i - 1)
+            throw new IndexOutOfBoundsException("current expression doesn't equal last expression");
+        current++;
+        return checkProofForN(i);
     }
 
     public int checkProof() {
         printTitle();
 
         for (int i = 1; i <= data.proof.size(); i++) {
-            if (i % 101 == 0)
-                System.out.println("Прогресс: " + i);
-            Expression e = data.proof.get(i - 1);
-
-            if (AxiomsAndSchemes.isAxiom(e) > 0) {
-                printFirstCase(e);
-            } else if (assumptionList.isAssumption(e) > 0) {
-                printFirstCase(e);
-            } else if (targetAssumption != null && e.equalWith(targetAssumption)) {
-                for (Expression aa : DeductionTheorem.getAToA(e)) {
-                    aa.print(pw);
-                    pw.println();
-                }
-            } else {
-                Pair<Integer, Integer> mp = modusPonensChecker.isModusPonens(i - 1);
-                if (mp.getKey() > 0) {
-                    if (targetAssumption != null) {
-                        for (Expression aa : DeductionTheorem.getMP(data.proof, e, targetAssumption, mp)) {
-                            aa.print(pw);
-                            pw.println();
-                        }
-                    } else {
-                        e.print(pw);
-                        pw.println();
-                    }
-                    continue;
-                }
-
-                Pair<Integer, String> ir = inferenceRules.isInferenceRule(i - 1);
-                if (ir.getKey() == 1) {
-                    if (targetAssumption != null) {
-                        if (!targetAssumption.getOperation().getFreeVariables().contains(ir.getValue())) {
-                            printUniversalQRule(e);
-                            continue;
-                        }
-                    } else {
-                        e.print(pw);
-                        pw.println();
-                        continue;
-                    }
-                }
-                if (ir.getKey() == 2) {
-                    if (targetAssumption != null) {
-                        if (!targetAssumption.getOperation().getFreeVariables().contains(ir.getValue())) {
-                            printExistenceQRule(e);
-                            continue;
-                        }
-                    } else {
-                        e.print(pw);
-                        pw.println();
-                        continue;
-                    }
-                }
-
-                error = i;
+            int e = checkProofForN(i);
+            if (e > 0) {
+                error = e;
                 break;
             }
         }
@@ -110,7 +67,69 @@ public class HW4 {
         return error;
     }
 
-    private void printTitle() {
+    private int checkProofForN(int i) {
+        if (i % 101 == 0)
+            System.out.println("Прогресс: " + i);
+        Expression e = data.proof.get(i - 1);
+
+        if (AxiomsAndSchemes.isAxiom(e) > 0) {
+            printFirstCase(e);
+            return -1;
+        } else if (assumptionList.isAssumption(e) > 0) {
+            printFirstCase(e);
+            return -1;
+        } else if (targetAssumption != null && e.equalWith(targetAssumption)) {
+            for (Expression aa : DeductionTheorem.getAToA(e)) {
+                aa.print(pw);
+                pw.println();
+            }
+            return -1;
+        } else {
+            Pair<Integer, Integer> mp = modusPonensChecker.isModusPonens(i - 1);
+            if (mp.getKey() > 0) {
+                if (targetAssumption != null) {
+                    for (Expression aa : DeductionTheorem.getMP(data.proof, e, targetAssumption, mp)) {
+                        aa.print(pw);
+                        pw.println();
+                    }
+                } else {
+                    e.print(pw);
+                    pw.println();
+                }
+                return -1;
+            }
+
+            Pair<Integer, String> ir = inferenceRules.isInferenceRule(i - 1);
+            if (ir.getKey() == 1) {
+                if (targetAssumption != null) {
+                    if (!targetAssumption.getOperation().getFreeVariables().contains(ir.getValue())) {
+                        printUniversalQRule(e);
+                        return -1;
+                    }
+                } else {
+                    e.print(pw);
+                    pw.println();
+                    return -1;
+                }
+            }
+            if (ir.getKey() == 2) {
+                if (targetAssumption != null) {
+                    if (!targetAssumption.getOperation().getFreeVariables().contains(ir.getValue())) {
+                        printExistenceQRule(e);
+                        return -1;
+                    }
+                } else {
+                    e.print(pw);
+                    pw.println();
+                    return -1;
+                }
+            }
+
+            return i;
+        }
+    }
+
+    public void printTitle() {
         for (int i = 0; i < data.assumptions.size(); i++) {
             data.assumptions.get(i).print(pw);
             if (i < data.assumptions.size() - 1)

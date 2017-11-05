@@ -63,17 +63,20 @@ public class Main {
                 break;
             case "4":
                 predicateParser = createPredicateParser(in);
-                predicateParser.file();
-                data = predicateParser.data;
-                data.prepare();
-                HW4 hw4 = new HW4(data, pw);
-                int code = hw4.checkProof();
-                if (code > 0) {
-                    pw.flush();
-                    pw.close();
-                    pw = new PrintWriter(new FileWriter(args[2]));
-                    pw.println("Вывод некоректен начиная с формулы номер " + code);
-                }
+                //1
+//                predicateParser.file();
+//                data = predicateParser.data;
+//                HW4 hw4 = new HW4(data, pw);
+//                int code = hw4.checkProof();
+//                if (code > 0) {
+//                    pw.flush();
+//                    pw.close();
+//                    pw = new PrintWriter(new FileWriter(args[2]));
+//                    pw.println("Вывод некоректен начиная с формулы номер " + code);
+//                }
+
+                //2
+                predicateParser.sequentialFile(pw, args[2]);
                 break;
             case "5":
                 predicateParser = createPredicateParser(in);

@@ -1,18 +1,28 @@
 grammar Predicate;
 
 @parser::header {
+import com.lytr777.HW4;
 import com.lytr777.propositionalCalculus.operations.*;
 import com.lytr777.predicateСalculus.operations.*;
 import com.lytr777.predicateСalculus.operations.Predicate;
 import com.lytr777.util.Expression;
 import com.lytr777.util.InitialData;
 import javafx.util.Pair;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
 }
 
 @parser::members {
 public InitialData data = new InitialData();
+public HW4 hw4;
+public PrintWriter pw;
 public int lines = 0;
 }
+
+sequentialFile[PrintWriter pw, String out]
+    : title '\n' { this.pw = pw; hw4 = new HW4(data, pw); hw4.printTitle(); } (expression '\n' { data.addProofExpression(new Expression($expression.op)); lines += 1; if (lines % 500 == 0) System.out.println("Прочитано " + lines + " строк"); int code = hw4.checkLast(); if (code > 0) { pw.flush(); pw.close(); pw = new PrintWriter(new FileWriter(out)); pw.println("Вывод некоректен начиная с формулы номер " + code); }} )*
+    ;
 
 file
     : title '\n' (expression '\n' { data.addProofExpression(new Expression($expression.op)); lines += 1; if (lines % 500 == 0) System.out.println("Прочитано " + lines + " строк");} )*

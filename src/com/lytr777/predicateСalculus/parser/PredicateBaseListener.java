@@ -1,12 +1,16 @@
 // Generated from /Users/lytr777/IdeaProjects/MATLOG_HW/src/com/lytr777/predicateСalculus/parser/Predicate.g4 by ANTLR 4.7
 package com.lytr777.predicateСalculus.parser;
 
+import com.lytr777.HW4;
 import com.lytr777.propositionalCalculus.operations.*;
 import com.lytr777.predicateСalculus.operations.*;
 import com.lytr777.predicateСalculus.operations.Predicate;
 import com.lytr777.util.Expression;
 import com.lytr777.util.InitialData;
 import javafx.util.Pair;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -19,6 +23,18 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * of the available methods.
  */
 public class PredicateBaseListener implements PredicateListener {
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSequentialFile(PredicateParser.SequentialFileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSequentialFile(PredicateParser.SequentialFileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,12 +1,16 @@
 // Generated from /Users/lytr777/IdeaProjects/MATLOG_HW/src/com/lytr777/predicateСalculus/parser/Predicate.g4 by ANTLR 4.7
 package com.lytr777.predicateСalculus.parser;
 
+import com.lytr777.HW4;
 import com.lytr777.propositionalCalculus.operations.*;
 import com.lytr777.predicateСalculus.operations.*;
 import com.lytr777.predicateСalculus.operations.Predicate;
 import com.lytr777.util.Expression;
 import com.lytr777.util.InitialData;
 import javafx.util.Pair;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -15,6 +19,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link PredicateParser}.
  */
 public interface PredicateListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link PredicateParser#sequentialFile}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequentialFile(PredicateParser.SequentialFileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PredicateParser#sequentialFile}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequentialFile(PredicateParser.SequentialFileContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PredicateParser#file}.
 	 * @param ctx the parse tree

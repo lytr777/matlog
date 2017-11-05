@@ -17,14 +17,17 @@ public class InitialData {
     }
 
     public void addAssumptionExpression(Expression expression) {
+        expression.reconstruct();
         assumptions.add(expression);
     }
 
     public void addProofExpression(Expression expression) {
+        expression.reconstruct();
         proof.add(expression);
     }
 
     public void setStatement(Expression expression) {
+        expression.reconstruct();
         statement = expression;
     }
 
