@@ -1,16 +1,12 @@
 package com.lytr777.util;
 
-import com.lytr777.propositionalCalculus.Expression;
 import com.lytr777.propositionalCalculus.checkers.AxiomSchemes;
 import com.lytr777.propositionalCalculus.checkers.ModusPonensChecker;
 import com.lytr777.propositionalCalculus.operations.Implication;
-import com.lytr777.propositionalCalculus.operations.Operation;
 import javafx.util.Pair;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by lytr777 on 05/09/2017.
@@ -18,20 +14,6 @@ import java.util.Map;
 public class DeductionTheorem {
 
     public static List<Expression> deduction(List<Expression> assumptions, List<Expression> proof) {
-//        System.out.println("-------input-------");
-//        System.out.println();
-//        System.out.println("-------assumptions-------");
-//        for (Expression e : assumptions) {
-//            e.print();
-//            System.out.println();
-//        }
-//        System.out.println("-------proof-------");
-//        for (Expression e : proof) {
-//            e.print();
-//            System.out.println();
-//        }
-//        System.out.println();
-//        System.out.println("-------|||-------");
         List<Expression> list = new LinkedList<>();
         Expression target = assumptions.get(assumptions.size() - 1);
         ModusPonensChecker mpc = new ModusPonensChecker(proof);
@@ -55,14 +37,6 @@ public class DeductionTheorem {
                 }
             }
         }
-//        System.out.println("-------output-------");
-//        System.out.println();
-//        for (Expression e : list) {
-//            e.print();
-//            System.out.println();
-//        }
-//        System.out.println();
-//        System.out.println("-------|||-------");
         return list;
     }
 
@@ -74,7 +48,7 @@ public class DeductionTheorem {
         return false;
     }
 
-    private static List<Expression> getFirstCase(Expression e, Expression target) {
+    public static List<Expression> getFirstCase(Expression e, Expression target) {
         List<Expression> list = new LinkedList<>();
         list.add(new Expression(new Implication(
                 e.getOperation(),
@@ -136,6 +110,10 @@ public class DeductionTheorem {
         )));
         list.add(new Expression(new Implication(target.getOperation(), target.getOperation())));
         return list;
+    }
+
+    public static List<Expression> getMP(List<Expression> proof, Expression e, Expression target, Pair<Integer, Integer> mp) {
+        return getThirdCase(proof, e, target, mp);
     }
 
     private static List<Expression> getThirdCase(List<Expression> proof, Expression e, Expression target, Pair<Integer, Integer> mp) {

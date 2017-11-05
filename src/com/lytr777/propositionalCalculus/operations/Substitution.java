@@ -1,12 +1,14 @@
 package com.lytr777.propositionalCalculus.operations;
 
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by lytr777 on 20/08/2017.
  */
-public class Substitution implements Operation {
+public class Substitution extends AbstractOperation {
 
     private String name;
 
@@ -30,6 +32,31 @@ public class Substitution implements Operation {
     }
 
     @Override
+    public void addArgument(Operation arg) {
+        throw new UnsupportedOperationException("Substitution can't contain arguments");
+    }
+
+    @Override
+    public List<Operation> getArguments() {
+        throw new UnsupportedOperationException("Substitution can't contain arguments");
+    }
+
+    @Override
+    public Set<String> getFreeVariables() {
+        throw new UnsupportedOperationException("Substitution can't contain variables");
+    }
+
+    @Override
+    public boolean isAvailableToInsert(String v, Set<String> free, boolean linked) {
+        throw new UnsupportedOperationException("Substitution can't contain variables");
+    }
+
+    @Override
+    public Operation replaceVariable(String v, Operation op) {
+        throw new UnsupportedOperationException("Substitution can't contain variables");
+    }
+
+    @Override
     public boolean isTrueOn(Map<String, Boolean> values) {
         throw new UnsupportedOperationException("Substitution hasn't logical value");
     }
@@ -50,7 +77,8 @@ public class Substitution implements Operation {
     }
 
     @Override
-    public void reconstruct() {}
+    public void reconstruct() {
+    }
 
     public String getName() {
         return name;
@@ -63,7 +91,7 @@ public class Substitution implements Operation {
         else {
             Operation operation = substitutions.get(name);
             if (operation != null)
-                operation.print(pw,false, null);
+                operation.print(pw, false, null);
         }
     }
 
@@ -82,10 +110,5 @@ public class Substitution implements Operation {
     public void printTree(int level) {
         printLevel(level);
         System.out.println(name);
-    }
-
-    private void printLevel(int level) {
-        for (int i = 0; i < level; i++)
-            System.out.print("--");
     }
 }

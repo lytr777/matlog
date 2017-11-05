@@ -1,7 +1,7 @@
 package com.lytr777;
 
-import com.lytr777.propositionalCalculus.Expression;
-import com.lytr777.propositionalCalculus.InitialData;
+import com.lytr777.util.Expression;
+import com.lytr777.util.InitialData;
 import com.lytr777.propositionalCalculus.operations.*;
 import com.lytr777.util.DeductionTheorem;
 import com.lytr777.util.Prover;
@@ -14,9 +14,9 @@ import java.util.*;
  */
 public class HW3 {
 
-    PrintWriter pw;
-    InitialData data;
-    List<String> variableList;
+    private PrintWriter pw;
+    private InitialData data;
+    private List<String> variableList;
 
     public HW3(InitialData data, PrintWriter pw) {
         this.data = data;

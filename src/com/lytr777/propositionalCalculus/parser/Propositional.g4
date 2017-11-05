@@ -1,8 +1,8 @@
-grammar FirstHW;
+grammar Propositional;
 
 @parser::header {
-import com.lytr777.propositionalCalculus.Expression;
-import com.lytr777.propositionalCalculus.InitialData;
+import com.lytr777.util.Expression;
+import com.lytr777.util.InitialData;
 import com.lytr777.propositionalCalculus.operations.*;
 }
 
@@ -51,3 +51,4 @@ neg returns [Operation op]
     ;
 
 NAME : [A-Z][A-Z0-9]* ;
+SKP : [ \t\r] -> skip ;

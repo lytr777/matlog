@@ -1,6 +1,5 @@
 package com.lytr777.util;
 
-import com.lytr777.propositionalCalculus.Expression;
 import com.lytr777.propositionalCalculus.operations.Implication;
 import com.lytr777.propositionalCalculus.operations.Negation;
 import com.lytr777.propositionalCalculus.operations.Operation;

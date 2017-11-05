@@ -9,5 +9,16 @@ public enum OperationType {
     CONJUNCTION,
     NEGATION,
     VARIABLE,
-    SUBSTITUTION
+    SUBSTITUTION,
+
+    EXISTENCE_Q,
+    UNIVERSAL_Q,
+
+    PREDICATE,
+    FUNCTION,
+    EQUALITY,
+    ADD,
+    MUL,
+    SUCCESSOR,
+    ZERO
 }

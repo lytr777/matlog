@@ -1,5 +1,8 @@
-package com.lytr777.propositionalCalculus;
+package com.lytr777.util;
 
+import com.lytr777.predicateСalculus.operations.AbstractFunctionalOperator;
+import com.lytr777.predicateСalculus.operations.ExistenceQ;
+import com.lytr777.predicateСalculus.operations.UniversalQ;
 import com.lytr777.propositionalCalculus.operations.Operation;
 import com.lytr777.propositionalCalculus.operations.OperationType;
 import com.lytr777.propositionalCalculus.operations.Variable;
@@ -68,10 +71,41 @@ public class Expression {
                         var2 = (Variable) op2;
                 return var1.getName().equals(var2.getName());
             }
+            if (op1.getType() == OperationType.FUNCTION || op1.getType() == OperationType.PREDICATE) {
+                AbstractFunctionalOperator func1 = (AbstractFunctionalOperator) op1,
+                        func2 = (AbstractFunctionalOperator) op2;
+                if (func1.getName().equals(func2.getName())) {
+                    List<Operation> args1 = func1.getArguments(),
+                            args2 = func2.getArguments();
+                    if (args1.size() == args2.size()) {
+                        for (int i = 0; i < args1.size(); i++)
+                            if (!equals(args1.get(i), args2.get(i)))
+                                return false;
+                        return true;
+                    }
+                }
+                return false;
+            }
+            if (op1.getType() == OperationType.ZERO)
+                return true;
+            if (op1.getType() == OperationType.EXISTENCE_Q) {
+                ExistenceQ eq1 = (ExistenceQ) op1,
+                        eq2 = (ExistenceQ) op2;
+                if (eq1.getVariable().equals(eq2.getVariable()) && equals(eq1.getFirstOperation(), eq2.getFirstOperation()))
+                    return true;
+                return false;
+            }
+            if (op1.getType() == OperationType.UNIVERSAL_Q) {
+                UniversalQ uq1 = (UniversalQ) op1,
+                        uq2 = (UniversalQ) op2;
+                if (uq1.getVariable().equals(uq2.getVariable()) && equals(uq1.getFirstOperation(), uq2.getFirstOperation()))
+                    return true;
+                return false;
+            }
             if (!equals(op1.getFirstOperation(), op2.getFirstOperation()))
                 return false;
-            if (op1.getType() != OperationType.NEGATION && !equals(op1.getSecondOperation(), op2.getSecondOperation()))
-                return false;
+            if (op1.getType() != OperationType.NEGATION && op1.getType() != OperationType.SUCCESSOR)
+                return equals(op1.getSecondOperation(), op2.getSecondOperation());
             return true;
         }
         return false;

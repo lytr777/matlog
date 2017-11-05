@@ -1,9 +1,6 @@
-package com.lytr777.propositionalCalculus;
+package com.lytr777.util;
 
-import com.lytr777.propositionalCalculus.checkers.AssumptionList;
-import com.lytr777.propositionalCalculus.checkers.ModusPonensChecker;
-
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,12 +11,9 @@ public class InitialData {
     public List<Expression> assumptions, proof;
     public Expression statement;
 
-    public AssumptionList assumptionList;
-    public ModusPonensChecker modusPonensChecker;
-
     public InitialData() {
-        assumptions = new LinkedList<>();
-        proof = new LinkedList<>();
+        assumptions = new ArrayList<>();
+        proof = new ArrayList<>();
     }
 
     public void addAssumptionExpression(Expression expression) {
@@ -36,8 +30,6 @@ public class InitialData {
 
     public void prepare() {
         reconstruct();
-        assumptionList = new AssumptionList(assumptions);
-        modusPonensChecker = new ModusPonensChecker(proof);
     }
 
     private void reconstruct() {

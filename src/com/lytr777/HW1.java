@@ -1,7 +1,9 @@
 package com.lytr777;
 
-import com.lytr777.propositionalCalculus.Expression;
-import com.lytr777.propositionalCalculus.InitialData;
+import com.lytr777.propositionalCalculus.checkers.AssumptionList;
+import com.lytr777.propositionalCalculus.checkers.ModusPonensChecker;
+import com.lytr777.util.Expression;
+import com.lytr777.util.InitialData;
 import com.lytr777.propositionalCalculus.checkers.AxiomSchemes;
 import javafx.util.Pair;
 
@@ -12,12 +14,17 @@ import java.io.PrintWriter;
  */
 public class HW1 {
 
-    PrintWriter pw;
-    InitialData data;
+    private PrintWriter pw;
+    private InitialData data;
+
+    private AssumptionList assumptionList;
+    private ModusPonensChecker modusPonensChecker;
 
     public HW1(InitialData data, PrintWriter pw) {
         this.data = data;
         this.pw = pw;
+        assumptionList = new AssumptionList(data.assumptions);
+        modusPonensChecker = new ModusPonensChecker(data.proof);
     }
 
     public void checkProof() {
@@ -36,13 +43,13 @@ public class HW1 {
                 continue;
             }
 
-            j = data.assumptionList.isAssumption(e);
+            j = assumptionList.isAssumption(e);
             if (j > 0) {
                 pw.println(" (Предп. " + j + ")");
                 continue;
             }
 
-            Pair<Integer, Integer> mp = data.modusPonensChecker.isModusPonens(i - 1);
+            Pair<Integer, Integer> mp = modusPonensChecker.isModusPonens(i - 1);
             if (mp.getKey() > 0) {
                 pw.println(" (M.P. " + mp.getKey() + ", " + mp.getValue() + ")");
                 continue;

@@ -1,7 +1,9 @@
 package com.lytr777;
 
-import com.lytr777.propositionalCalculus.Expression;
-import com.lytr777.propositionalCalculus.InitialData;
+import com.lytr777.propositionalCalculus.checkers.AssumptionList;
+import com.lytr777.propositionalCalculus.checkers.ModusPonensChecker;
+import com.lytr777.util.Expression;
+import com.lytr777.util.InitialData;
 import com.lytr777.propositionalCalculus.checkers.AxiomSchemes;
 import com.lytr777.propositionalCalculus.operations.Implication;
 import com.lytr777.propositionalCalculus.operations.Operation;
@@ -9,7 +11,6 @@ import javafx.util.Pair;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,14 +18,19 @@ import java.util.Map;
  */
 public class HW2 {
 
-    PrintWriter pw;
-    InitialData data;
-    Expression targetAssumption;
+    private PrintWriter pw;
+    private InitialData data;
+    private Expression targetAssumption;
+
+    AssumptionList assumptionList;
+    ModusPonensChecker modusPonensChecker;
 
     public HW2(InitialData data, PrintWriter pw) {
         this.data = data;
         this.pw = pw;
         targetAssumption = data.assumptions.remove(data.assumptions.size() - 1);
+        assumptionList = new AssumptionList(data.assumptions);
+        modusPonensChecker = new ModusPonensChecker(data.proof);
     }
 
     public void buildProof() {
@@ -34,12 +40,12 @@ public class HW2 {
 
             if (AxiomSchemes.isAxiom(e) > 0)
                 printFirstCase(e);
-            else if (data.assumptionList.isAssumption(e) > 0)
+            else if (assumptionList.isAssumption(e) > 0)
                 printFirstCase(e);
             else if (targetAssumption.equalWith(e))
                 printSecondCase(e);
             else {
-                Pair<Integer, Integer> mp = data.modusPonensChecker.isModusPonens(i - 1);
+                Pair<Integer, Integer> mp = modusPonensChecker.isModusPonens(i - 1);
                 if (mp.getKey() > 0)
                     printThirdCase(e, mp);
             }
@@ -52,11 +58,11 @@ public class HW2 {
             if (i < data.assumptions.size() - 1)
                 System.out.print(",");
         }
-        System.out.print("|-");
+        pw.print("|-");
         Expression newStatement = new Expression(new Implication(targetAssumption.getOperation(),
                 data.statement.getOperation()));
         newStatement.print(pw);
-        System.out.println();
+        pw.println();
     }
 
     private void printFirstCase(Expression e) {
@@ -64,12 +70,12 @@ public class HW2 {
         substitutions.put("A", e.getOperation());
         substitutions.put("B", targetAssumption.getOperation());
         AxiomSchemes.printAxiom(pw,1, substitutions);
-        System.out.println();
+        pw.println();
         e.print(pw);
-        System.out.println();
+        pw.println();
         Expression newE = new Expression(new Implication(targetAssumption.getOperation(), e.getOperation()));
         newE.print(pw);
-        System.out.println();
+        pw.println();
     }
 
     private void printSecondCase(Expression e) {
@@ -77,13 +83,13 @@ public class HW2 {
         substitutions.put("A", targetAssumption.getOperation());
         substitutions.put("B", targetAssumption.getOperation());
         AxiomSchemes.printAxiom(pw,1, substitutions);
-        System.out.println();
+        pw.println();
         substitutions.replace("B", new Implication(targetAssumption.getOperation(), targetAssumption.getOperation()));
         AxiomSchemes.printAxiom(pw,1, substitutions);
-        System.out.println();
+        pw.println();
         substitutions.put("C", targetAssumption.getOperation());
         AxiomSchemes.printAxiom(pw,2, substitutions);
-        System.out.println();
+        pw.println();
         Expression i = new Expression(new Implication(
                 new Implication(
                         targetAssumption.getOperation(),
@@ -95,11 +101,11 @@ public class HW2 {
                 new Implication(targetAssumption.getOperation(), targetAssumption.getOperation())
         ));
         i.print(pw);
-        System.out.println();
+        pw.println();
         Expression newE = new Expression(new Implication(targetAssumption.getOperation(),
                 targetAssumption.getOperation()));
         newE.print(pw);
-        System.out.println();
+        pw.println();
     }
 
     private void printThirdCase(Expression e, Pair<Integer, Integer> mp) {
@@ -108,15 +114,15 @@ public class HW2 {
         substitutions.put("B", data.proof.get(mp.getKey() - 1).getOperation());
         substitutions.put("C", e.getOperation());
         AxiomSchemes.printAxiom(pw,2, substitutions);
-        System.out.println();
+        pw.println();
         Expression i = new Expression(new Implication(
                 new Implication(targetAssumption.getOperation(), data.proof.get(mp.getValue() - 1).getOperation()),
                 new Implication(targetAssumption.getOperation(), e.getOperation())
         ));
         i.print(pw);
-        System.out.println();
+        pw.println();
         Expression newE = new Expression(new Implication(targetAssumption.getOperation(), e.getOperation()));
         newE.print(pw);
-        System.out.println();
+        pw.println();
     }
 }

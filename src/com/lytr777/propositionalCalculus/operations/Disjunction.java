@@ -6,9 +6,7 @@ import java.util.Map;
 /**
  * Created by lytr777 on 15/08/2017.
  */
-public class Disjunction implements Operation {
-
-    private Operation first, second;
+public class Disjunction extends AbstractBinaryOperation {
 
     public Disjunction(Operation op) {
         first = op;
@@ -25,13 +23,8 @@ public class Disjunction implements Operation {
     }
 
     @Override
-    public void setFirstOperation(Operation op) {
-        first = op;
-    }
-
-    @Override
-    public void setSecondOperation(Operation op) {
-        second = op;
+    public Operation replaceVariable(String v, Operation op) {
+        return new Disjunction(first.replaceVariable(v, op), second.replaceVariable(v, op));
     }
 
     @Override
@@ -40,66 +33,17 @@ public class Disjunction implements Operation {
     }
 
     @Override
-    public boolean isUseless() {
-        return second == null;
-    }
-
-    @Override
-    public Operation getFirstOperation() {
-        return first;
-    }
-
-    @Override
-    public Operation getSecondOperation() {
-        return second;
-    }
-
-    @Override
-    public void reconstruct() {
-        first.reconstruct();
-        while (first.isUseless())
-            first = first.getFirstOperation();
-        if (second != null) {
-            second.reconstruct();
-            while (second.isUseless())
-                second = second.getFirstOperation();
-        }
-    }
-
-    @Override
     public void print(PrintWriter pw, boolean outside, Map<String, Operation> substitutions) {
-        if (!outside) pw.print("(");
-        first.print(pw, false, substitutions);
-        if (second != null) {
-            pw.print("|");
-            second.print(pw, false, substitutions);
-        }
-        if (!outside) pw.print(")");
+        print(pw, outside, substitutions, "|");
     }
 
     @Override
     public void print(boolean outside, Map<String, Operation> substitutions) {
-        if (!outside) System.out.print("(");
-        first.print(false, substitutions);
-        if (second != null) {
-            System.out.print("|");
-            second.print(false, substitutions);
-        }
-        if (!outside) System.out.print(")");
+        print(outside, substitutions, "|");
     }
 
     @Override
     public void printTree(int level) {
-        printLevel(level);
-        System.out.println("Disjunction");
-        first.printTree(level + 1);
-        if (second != null) {
-            second.printTree(level + 1);
-        }
-    }
-
-    private void printLevel(int level) {
-        for (int i = 0; i < level; i++)
-            System.out.print("--");
+        printTree(level, "Disjunction");
     }
 }

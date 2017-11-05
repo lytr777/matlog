@@ -1,8 +1,8 @@
-// Generated from /Users/lytr777/IdeaProjects/MATLOG_HW/src/com/lytr777/propositionalCalculus/parser/FirstHW.g4 by ANTLR 4.7
+// Generated from /Users/lytr777/IdeaProjects/MATLOG_HW/src/com/lytr777/propositionalCalculus/parser/Propositional.g4 by ANTLR 4.7
 package com.lytr777.propositionalCalculus.parser;
 
-import com.lytr777.propositionalCalculus.Expression;
-import com.lytr777.propositionalCalculus.InitialData;
+import com.lytr777.util.Expression;
+import com.lytr777.util.InitialData;
 import com.lytr777.propositionalCalculus.operations.*;
 
 import org.antlr.v4.runtime.atn.*;
@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class FirstHWParser extends Parser {
+public class PropositionalParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -23,7 +23,7 @@ public class FirstHWParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		NAME=10;
+		NAME=10, SKP=11;
 	public static final int
 		RULE_file = 0, RULE_title = 1, RULE_expression = 2, RULE_dis = 3, RULE_diss = 4, 
 		RULE_con = 5, RULE_cons = 6, RULE_neg = 7;
@@ -35,7 +35,7 @@ public class FirstHWParser extends Parser {
 		null, "'\n'", "','", "'|-'", "'->'", "'|'", "'&'", "'!'", "'('", "')'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, "NAME"
+		null, null, null, null, null, null, null, null, null, null, "NAME", "SKP"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -71,7 +71,7 @@ public class FirstHWParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "FirstHW.g4"; }
+	public String getGrammarFileName() { return "Propositional.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -86,7 +86,7 @@ public class FirstHWParser extends Parser {
 	public InitialData data = new InitialData();
 	public int lines = 0;
 
-	public FirstHWParser(TokenStream input) {
+	public PropositionalParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -107,11 +107,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_file; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterFile(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterFile(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitFile(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitFile(this);
 		}
 	}
 
@@ -170,11 +170,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_title; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterTitle(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterTitle(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitTitle(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitTitle(this);
 		}
 	}
 
@@ -249,11 +249,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterExpression(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitExpression(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitExpression(this);
 		}
 	}
 
@@ -313,11 +313,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_dis; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterDis(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterDis(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitDis(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitDis(this);
 		}
 	}
 
@@ -361,11 +361,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_diss; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterDiss(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterDiss(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitDiss(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitDiss(this);
 		}
 	}
 
@@ -429,11 +429,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_con; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterCon(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterCon(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitCon(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitCon(this);
 		}
 	}
 
@@ -477,11 +477,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_cons; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterCons(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterCons(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitCons(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitCons(this);
 		}
 	}
 
@@ -535,7 +535,7 @@ public class FirstHWParser extends Parser {
 		public Token NAME;
 		public NegContext neg;
 		public ExpressionContext expression;
-		public TerminalNode NAME() { return getToken(FirstHWParser.NAME, 0); }
+		public TerminalNode NAME() { return getToken(PropositionalParser.NAME, 0); }
 		public NegContext neg() {
 			return getRuleContext(NegContext.class,0);
 		}
@@ -548,11 +548,11 @@ public class FirstHWParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_neg; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).enterNeg(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).enterNeg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FirstHWListener ) ((FirstHWListener)listener).exitNeg(this);
+			if ( listener instanceof PropositionalListener ) ((PropositionalListener)listener).exitNeg(this);
 		}
 	}
 
@@ -609,7 +609,7 @@ public class FirstHWParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f^\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\r^\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\2\3\2"+
 		"\3\2\7\2\31\n\2\f\2\16\2\34\13\2\3\3\3\3\3\3\3\3\3\3\3\3\7\3$\n\3\f\3"+
 		"\16\3\'\13\3\5\3)\n\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+

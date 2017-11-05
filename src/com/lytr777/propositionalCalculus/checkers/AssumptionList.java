@@ -1,6 +1,6 @@
 package com.lytr777.propositionalCalculus.checkers;
 
-import com.lytr777.propositionalCalculus.Expression;
+import com.lytr777.util.Expression;
 
 import java.util.List;
 
