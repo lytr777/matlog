@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class Main {
 
@@ -63,6 +64,7 @@ public class Main {
                 break;
             case "4":
                 predicateParser = createPredicateParser(in);
+                predicateParser.setBuildParseTree(false);
                 //1
 //                predicateParser.file();
 //                data = predicateParser.data;
